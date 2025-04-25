@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting to 2Checkout…</title>
+  </head>
+  <body>
+    <form id="tcoForm" action="{{ action_url }}" method="post">
+      {% for name, val in inputs.items() %}
+        <input type="hidden" name="{{ name }}" value="{{ val|e }}">
+      {% endfor %}
+      <noscript>
+        <p>Redirecting you to payment… If nothing happens, click below:</p>
+        <button type="submit">Complete Test Checkout</button>
+      </noscript>
+    </form>
+    <script>
+      document.getElementById('tcoForm').submit();
+    </script>
+  </body>
+</html>

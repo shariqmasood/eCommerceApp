@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Order Confirmation – My Store{% endblock %}
+{% block content %}
+<h1 class="mb-4">Thank you for your purchase!</h1>
+<p>Your order #: {{ order.id }}</p>
+
+<table class="table">
+  <thead>
+    <tr><th>Product</th><th>Qty</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    {% for item in order.items %}
+    <tr>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>${{ '%.2f' % (item.unit_price/100) }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="2" class="text-end fw-bold">Total:</td>
+      <td class="fw-bold">
+        ${{ '%.2f' % (order.items|sum(attribute='unit_price')/100) }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
+{% endblock %}
